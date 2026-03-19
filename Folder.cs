@@ -8,7 +8,7 @@ namespace _5_lab
 {
 	public class Folder : FileSystemItem
 	{
-		List<FileSystemItem> items = [];
+		public List<FileSystemItem> items = [];
 
 		public Folder(string name) : base(name) 
 		{

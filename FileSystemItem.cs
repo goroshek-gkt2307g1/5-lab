@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace _5_lab
 {
+
+
 	public abstract class FileSystemItem
 	{
 		public string Name { get; set; }

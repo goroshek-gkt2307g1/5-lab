@@ -32,7 +32,29 @@ namespace _5_lab
 			Console.WriteLine($"размер папки 'Медиа': {media.GetSize()} байт");
 			Console.WriteLine($"размер корневой папки: {root.GetSize()} байт");
 
-			Console.ReadLine();
+			//адаптер
+
+			FileSystemAdapter adapter = new FileSystemAdapter(root);
+
+			Console.WriteLine("Содержимое корня:");
+			foreach (string item in adapter.ListItems("/"))
+				Console.WriteLine($"  - {item}");
+
+			Console.WriteLine("\nСодержимое папки Медиа:");
+			foreach (string item in adapter.ListItems("/Медиа"))
+				Console.WriteLine($"  - {item}");
+
+			byte[] fileData = adapter.ReadFile("/Медиа/photo.jpg");
+			Console.WriteLine($"\nПрочитан файл photo.jpg: {fileData.Length} байт");
+
+			byte[] newData = new byte[256];
+			adapter.WriteFile("/Документы/newfile.txt", newData);
+			Console.WriteLine("Создан файл newfile.txt");
+
+			adapter.DeleteItem("/Документы/newfile.txt");
+			Console.WriteLine("Файл newfile.txt удален\n");
+
+
 		}
 	}
 }
