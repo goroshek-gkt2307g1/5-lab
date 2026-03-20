@@ -36,7 +36,7 @@ namespace _5_lab
 
 			FileSystemAdapter adapter = new FileSystemAdapter(root);
 
-			Console.WriteLine("Содержимое корня:");
+			Console.WriteLine("\nСодержимое корня:");
 			foreach (string item in adapter.ListItems("/"))
 				Console.WriteLine($"  - {item}");
 
@@ -53,6 +53,20 @@ namespace _5_lab
 
 			adapter.DeleteItem("/Документы/newfile.txt");
 			Console.WriteLine("Файл newfile.txt удален\n");
+
+			//фасад
+			Folder targetRoot = new Folder("Target");
+			FileSystemAdapter targetAdapter = new FileSystemAdapter(targetRoot);
+
+			SyncFacade facade = new SyncFacade(adapter, targetAdapter);
+
+			facade.SyncFolder("/Медиа", "/");
+
+			Console.WriteLine("Содержимое target после синхронизации:");
+			foreach (string item in targetAdapter.ListItems("/"))
+				Console.WriteLine($"     - {item}");
+
+			Console.ReadLine();
 
 
 		}
